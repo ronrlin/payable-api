@@ -9,6 +9,15 @@ Gem::Specification.new do |s|
   s.files       = ["lib/payable.rb"]
   s.homepage    = 'http://rubygems.org/gems/payable'
   s.license     = 'MIT'
+
+  s.files         = `git ls-files`.split("\n")
+  s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
+  s.require_paths = ["lib"]
+
+  s.add_development_dependency "rspec", ">=2.14.1"
+  s.add_development_dependency "webmock", ">= 1.16.0"
+
   s.add_dependency "httparty", ">= 0.11.0"
   s.add_dependency "multi_json", ">= 1.0"
+
 end
