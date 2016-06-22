@@ -50,8 +50,7 @@ response.api_status # status field in the return body, Link to Error Codes
 response.api_error_message # Error message associated with status Error Code
 
 # Log work for worker
-response = client.work(id, workinfo)
-
+response = client.work(worker_id, {more info})
 response
 
 # Building
