@@ -57,11 +57,11 @@ response
 
 Building and publishing the gem is captured by the following steps:
 
-$ gem build payable.gemspec
-$ gem push payable-<current version>.gem
+> $ gem build payable.gemspec
+> $ gem push payable-<current version>.gem
 
-$ bundle
-$ rake -T
-$ rake build
-$ rake install
-$ rake release
+> $ bundle
+> $ rake -T
+> $ rake build
+> $ rake install
+> $ rake release
