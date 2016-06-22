@@ -28,6 +28,7 @@ $ gem install payable
 require "payable"
 
 Payable.api_key = '<your_api_key_here>'
+Payable.company_id '<your_company_id_here>'
 client = Payable::Client.new()
 
 # create a worker
