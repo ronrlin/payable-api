@@ -19,13 +19,13 @@ Ruby client for the Payable.com API.
 
 To build the gem from source:
 
-$ gem build payable.gemspec
+> $ gem build payable.gemspec
 
-$ gem install payable
+> $ gem install payable
 
 # Usage
 
-require "payable"
+```require "payable"
 
 Payable.api_key = '<your_api_key_here>'
 Payable.company_id '<your_company_id_here>'
@@ -48,16 +48,18 @@ response.http_status_code # HTTP response code, 200 is ok.
 response.api_status # status field in the return body, Link to Error Codes
 
 response.api_error_message # Error message associated with status Error Code
+```
 
 # Log work for worker
-response = client.work(worker_id, {more info})
-response
+```response = client.work(worker_id, {more info})
+response```
 
 # Building
 
 Building and publishing the gem is captured by the following steps:
 
 > $ gem build payable.gemspec
+
 > $ gem push payable-<current version>.gem
 
 > $ bundle
