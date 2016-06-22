@@ -20,6 +20,7 @@ Ruby client for the Payable.com API.
 If you want to build the gem from source:
 
 $ gem build payable.gemspec
+
 Alternatively, you can install the gem from Rubyforge:
 
 $ gem install payable
@@ -31,25 +32,12 @@ require "payable"
 Payable.api_key = '<your_api_key_here>'
 client = Payable::Client.new()
 
-# send a transaction event -- note this is blocking
-event = "$transaction"
-
-user_id = "23056" # User ID's may only contain a-z, A-Z, 0-9, =, ., -, _, +, @, :, &, ^, %, !, $
-
-properties = {
- "$user_id" => user_id,
-  "$user_email" => "buyer@gmail.com",
-  "$seller_user_id" => "2371",
-  "seller_user_email" => "seller@gmail.com",
-  "$transaction_id" => "573050",
-  "$payment_method" => {
-    "$payment_type"    => "$credit_card",
-    "$payment_gateway" => "$braintree",
-    "$card_bin"        => "542486",
-    "$card_last4"      => "4444"
-  },
-  "$currency_code" => "USD",
-  "$amount" => 15230000,
+# create a worker
+info = {
+  "display_name" => "name",
+  "first_name" => "name",
+  "last_name" => "lastname",
+  "email" => "email@mail.com"
 }
 
 response = client.new_worker(info)
