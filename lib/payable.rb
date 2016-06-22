@@ -5,12 +5,13 @@ module Payable
 
   # Returns the path for the current API version
   def self.current_rest_api_path
-    "/v#{API_VERSION}/events"
+    "/v#{API_VERSION}/"
   end
 
   # Adding module scoped public API key
   class << self
     attr_accessor :api_key
+    attr_accessor :company_id
   end
 
   # Sets the Output logger to use within the client. This can be left uninitializaed

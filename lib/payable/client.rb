@@ -54,7 +54,7 @@ module Payable
   # This class wraps accesses through the API
   # curl -u company_id:api_key https://api.payable.com/v1/
   class Client
-    API_ENDPOINT = "https://api.payable.com/"
+    API_ENDPOINT = "https://api.payable.com"
     API_TIMEOUT = 2
 
     include HTTParty
@@ -68,19 +68,24 @@ module Payable
     #   cannot be nil or blank.
     # path
     #   The path to the Payable API, e.g., "/v1/workers"
+    # company_id
+    #   The company id associated with the Payable account.
     #
-    def initialize(api_key = Payable.api_key, path = Payable.current_rest_api_path, timeout = API_TIMEOUT)
+    def initialize(api_key = Payable.api_key, path = Payable.current_rest_api_path, timeout = API_TIMEOUT, company_id = Payable.company_id)
       raise("api_key must be a non-empty string") if !api_key.is_a?(String) || api_key.empty?
       raise("path must be a non-empty string") if !path.is_a?(String) || path.empty?
       @api_key = api_key
       @path = path
       @timeout = timeout
-
-
+      @company_id = company_id
     end
 
     def api_key
       @api_key
+    end
+
+    def company_id
+      @company_id
     end
 
     #def user_agent
@@ -119,7 +124,7 @@ module Payable
       begin
         #auth = {:username => "#{company_id}", :password => "#{api_key}"}
         #@blah = self.class.get("/v#{API_VERSION}/workers/#{worker_id}",
-                       :basic_auth => auth)
+        #               :basic_auth => auth)
 
         response = self.class.post(path)
         Response.new(response.body, response.code, response.response)
@@ -145,7 +150,7 @@ module Payable
       timetout ||= @timeout
 
       auth = {:username => "#{company_id}", :password => "#{api_key}"}
-      @blah = self.class.get("/v#{API_VERSION}/workers/#{worker_id}",
+      response = self.class.get("/v#{API_VERSION}/workers/#{worker_id}",
                      :basic_auth => auth)
 
       Response.new(response.body, response.code, response.response)

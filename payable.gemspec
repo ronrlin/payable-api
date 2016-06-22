@@ -10,8 +10,7 @@ Gem::Specification.new do |s|
   s.homepage    = 'http://rubygems.org/gems/payable'
   s.license     = 'MIT'
 
-  s.files         = `git ls-files`.split("\n")
-  s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
+  s.files = ['lib/payable.rb', 'lib/payable/client.rb', 'lib/payable/version.rb']
   s.require_paths = ["lib"]
 
   s.add_development_dependency "rspec", ">=2.14.1"
