@@ -61,7 +61,11 @@ Building and publishing the gem is captured by the following steps:
 > $ gem push payable-<current version>.gem
 
 > $ bundle
+
 > $ rake -T
+
 > $ rake build
+
 > $ rake install
+
 > $ rake release
