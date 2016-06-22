@@ -7,7 +7,8 @@ Gem::Specification.new do |s|
   s.authors     = ["Ron Lin"]
   s.email       = 'ronrlin@gmail.com'
   s.files       = ["lib/payable.rb"]
-  s.homepage    =
-    'http://rubygems.org/gems/payable'
-  s.license       = 'MIT'
+  s.homepage    = 'http://rubygems.org/gems/payable'
+  s.license     = 'MIT'
+  s.add_dependency "httparty", ">= 0.11.0"
+  s.add_dependency "multi_json", ">= 1.0"
 end
