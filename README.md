@@ -25,7 +25,8 @@ To build the gem from source:
 
 # Usage
 
-```require "payable"
+```ruby
+require "payable"
 
 Payable.api_key = '<your_api_key_here>'
 Payable.company_id '<your_company_id_here>'
@@ -51,8 +52,10 @@ response.api_error_message # Error message associated with status Error Code
 ```
 
 # Log work for worker
-```response = client.work(worker_id, {more info})
-response```
+```ruby
+response = client.work(worker_id, {more info})
+response
+```
 
 # Building
 
