@@ -17,11 +17,9 @@ Ruby client for the Payable.com API.
 
 # Installation
 
-If you want to build the gem from source:
+To build the gem from source:
 
 $ gem build payable.gemspec
-
-Alternatively, you can install the gem from Rubyforge:
 
 $ gem install payable
 
