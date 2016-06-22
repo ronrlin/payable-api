@@ -109,24 +109,26 @@ module Payable
     #   method returns nil; otherwise, a Response object is returned and captures
     #   the status message and status code.
     #
-    def create_worker(info, properties = {}, api_key = @api_key)
+    def create_worker(properties = {}, api_key = @api_key)
       warn "[WARNING] api_key cannot be empty, fallback to default api_key." if api_key.to_s.empty?
       api_key ||= @api_key
-      #raise("event must be a non-empty string") if (!event.is_a? String) || event.empty?
-      #raise("properties cannot be empty") if properties.empty?
-      #raise("Bad api_key parameter") if api_key.empty?
+      raise("properties cannot be empty") if properties.empty?
+      raise("Bad api_key parameter") if api_key.empty?
       path ||= @path
       timeout ||= @timeout
 
-      uri = URI.parse(API_ENDPOINT)
-      path = path + "?" + uri.query if !uri.query.to_s.empty?
+      #uri = URI.parse(API_ENDPOINT)
+      #path = path + "?" + uri.query if !uri.query.to_s.empty?
 
       begin
-        #auth = {:username => "#{company_id}", :password => "#{api_key}"}
-        #@blah = self.class.get("/v#{API_VERSION}/workers/#{worker_id}",
-        #               :basic_auth => auth)
+        auth = {:username => "#{company_id}", :password => "#{api_key}"}
+        response = self.class.post("/v#{API_VERSION}/workers",
+                        {
+                          :query => properties,
+                          :basic_auth => auth
+                        }
+                      )
 
-        response = self.class.post(path)
         Response.new(response.body, response.code, response.response)
       rescue StandardError => e
         Payable.warn("Failed to track event: " + e.to_s)
