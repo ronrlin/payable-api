@@ -117,9 +117,6 @@ module Payable
       path ||= @path
       timeout ||= @timeout
 
-      #uri = URI.parse(API_ENDPOINT)
-      #path = path + "?" + uri.query if !uri.query.to_s.empty?
-
       begin
         auth = {:username => "#{company_id}", :password => "#{api_key}"}
         response = self.class.post("/v#{API_VERSION}/workers",
@@ -156,6 +153,65 @@ module Payable
                      :basic_auth => auth)
 
       Response.new(response.body, response.code, response.response)
+    end
+
+    # Creates a record of work done.
+    #
+    # == Parameters:
+    #
+    # worker_id : String - Reference to a Worker that performed this work.
+    #
+    # work_type_id : Number - Identifies a Work Type configured in your Payable app
+    #
+    # quantity : Number - The quantity of work performed. The referenced Work Type's quantity_measure determines the unit of measure and precision. * hourly -> Integer # of seconds * money -> Integer # of cents * unit -> Float # of units * distance-> Float # of miles
+    #
+    # start : String - ISO 8601 - The date information is required, and hours, minutes, and seconds fields are encouraged
+    #
+    # end : (optional) String - ISO 8601 - Only relevant if you have hours, minutes, and seconds data for the “start” field
+    #
+    # notes : (optional) String - Description of the work
+    #
+    # == Returns:
+    #   In the case of an HTTP error (timeout, broken connection, etc.), this
+    #   method returns nil; otherwise, a Response object is returned and captures
+    #   the status message and status code.
+    #
+    def create_work(worker_id, work_type_id, quantity, start_date, end_date, notes, api_key = @api_key)
+      warn "[WARNING] api_key cannot be empty, fallback to default api_key." if api_key.to_s.empty?
+      api_key ||= @api_key
+      raise("worker_id is required") if worker_id.empty?
+      raise("work_type_id is required") if work_type_id.empty?
+      raise("quantity is required") if quantity.empty?
+      raise("start_date is required") if start_date.empty?
+      raise("Bad api_key parameter") if api_key.empty?
+      path ||= @path
+      timeout ||= @timeout
+
+      begin
+        auth = {:username => "#{company_id}", :password => "#{api_key}"}
+
+        parameters = {
+          "worker_id" => worker_id,
+          "work_type_id" => work_type_id,
+          "quantity" => quantity,
+          "start_date" => start_date,
+          "end_date" => end_date,
+          "notes" => notes,
+        }
+
+        response = self.class.post("/v#{API_VERSION}/workers",
+                        {
+                          :query => parameters,
+                          :basic_auth => auth
+                        }
+                      )
+
+        Response.new(response.body, response.code, response.response)
+      rescue StandardError => e
+        Payable.warn("Failed to track event: " + e.to_s)
+        Payable.warn(e.backtrace)
+        nil
+      end
     end
 
   end
