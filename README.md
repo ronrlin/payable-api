@@ -25,6 +25,8 @@ To build the gem from source:
 
 # Usage
 
+## Create a new "worker" - [link](http://www.home.com)
+
 ```ruby
 require "payable"
 
