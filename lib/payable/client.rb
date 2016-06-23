@@ -155,6 +155,27 @@ module Payable
       Response.new(response.body, response.code, response.response)
     end
 
+    # Retrieves work type.
+    #
+    # == Parameters:
+    # worker_type_id
+    #   A work_type_id.
+    #
+    # == Returns:
+    #   A Response object is returned.
+    #
+    def work_type(worker_type_id, api_key = @api_key)
+      raise("work_type_id must be a non-empty string") if (!worker_id.is_a? String) || worker_id.to_s.empty?
+      raise("Bad api_key parameter") if api_key.empty?
+      timetout ||= @timeout
+
+      auth = {:username => "#{company_id}", :password => "#{api_key}"}
+      response = self.class.get("/v#{API_VERSION}/work_types/#{worker_type_id}",
+                     :basic_auth => auth)
+
+      Response.new(response.body, response.code, response.response)
+    end
+
     # Creates a record of work done.
     #
     # == Parameters:
