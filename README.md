@@ -25,7 +25,7 @@ To build the gem from source:
 
 # Usage
 
-## Create a new "worker" - [link](http://www.home.com)
+## Create a new "worker" - [API](https://api.payable.com/docs/#api-WorkerGroup-PostWorkers)
 
 ```ruby
 require "payable"
@@ -53,7 +53,7 @@ response.api_status # status field in the return body, Link to Error Codes
 response.api_error_message # Error message associated with status Error Code
 ```
 
-# Log work for worker
+## Log work for worker - [API](https://api.payable.com/docs/#api-WorkGroup-PostWork)
 ```ruby
 
 work = {
