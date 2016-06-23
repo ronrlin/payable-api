@@ -18,5 +18,4 @@ Gem::Specification.new do |s|
 
   s.add_dependency "httparty", ">= 0.11.0"
   s.add_dependency "multi_json", ">= 1.0"
-
 end

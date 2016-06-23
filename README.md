@@ -53,8 +53,18 @@ response.api_error_message # Error message associated with status Error Code
 
 # Log work for worker
 ```ruby
-response = client.work(worker_id, {more info})
-response
+
+work = {
+  worker_id => "",
+  work_type_id => "",
+  quantity => "",
+  start_date => "",
+  end_date => "",
+  notes => ""
+}
+
+response = client.create_work(work)
+
 ```
 
 # Building
